@@ -1,0 +1,86 @@
+chgk.overview_question_types:
+  path: '/admin/structure/question_types'
+  defaults:
+    _content: '\Drupal\Core\Entity\Controller\EntityListController::listing'
+    entity_type: 'chgk_question_type'
+    _title: 'Question types'
+  requirements:
+    _permission: 'administer question types'
+
+chgk.question_type_add:
+  path: '/admin/structure/question_types/add'
+  defaults:
+    _entity_form: 'chgk_question_type.add'
+    _title: 'Add question type'
+  requirements:
+    _permission: 'administer question types'
+
+chgk.question_type_edit:
+  path: '/admin/structure/question_types/manage/{chgk_question_type}'
+  defaults:
+    _entity_form: 'chgk_question_type.edit'
+  requirements:
+    _permission: 'administer question types'
+
+chgk.question_type_delete_confirm:
+  path: '/admin/structure/question_types/manage/{chgk_question_type}/delete'
+  defaults:
+    _entity_form: 'chgk_question_type.delete'
+    _title: 'Delete'
+  requirements:
+    _entity_access: 'chgk_question_type.delete'
+
+chgk.question_add_page:
+  path: '/question/add'
+  defaults:
+    _title: 'Add question'
+    _content: '\Drupal\chgk\Controller\QuestionController::addPage'
+  requirements:
+    _permission: 'create questions'
+
+chgk.question_add:
+  path: '/question/add/{chgk_question_type}'
+  defaults:
+    _content: '\Drupal\chgk\Controller\QuestionController::add'
+    _title: 'Create question'
+  requirements:
+    _permission: 'create questions'
+
+chgk.question_edit:
+  path: '/question/{chgk_question}/edit'
+  defaults:
+    _entity_form: 'chgk_question.edit'
+  requirements:
+    _entity_access: 'chgk_question.update'
+
+
+chgk.question_view:
+  path: '/question/{chgk_question}'
+  defaults:
+    _content: '\Drupal\chgk\Controller\QuestionController::page'
+    _title_callback: '\Drupal\chgk\Controller\QuestionController::pageTitle'
+  requirements:
+    _permission: 'access content'
+
+chgk.question_delete_confirm:
+  path: '/question/{chgk_question}/delete'
+  defaults:
+    _entity_form: 'chgk_question.delete'
+  requirements:
+    _entity_access: 'chgk_question.delete'
+
+chgk.pack_add:
+  path: '/pack/add'
+  defaults:
+    _entity_form: 'chgk_pack.add'
+    _title: 'Add question pack'
+  requirements:
+    _permission: 'create questions'
+
+chgk.pack_settings:
+  path: '/admin/config/chgk/packs'
+  defaults:
+    _form: '\Drupal\chgk\PackSettingsForm'
+    _title: 'Pack settings'
+  requirements:
+    _permission: 'administer question packs'

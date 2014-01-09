@@ -1,0 +1,61 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a node.
+ *
+ * Available variables:
+ * - node: Full node entity.
+ *   - id: The node ID
+ *   - bundle: The type of the node, for example, "page" or "article".
+ *   - authorid: The user ID of the node author.
+ *   - published: Whether the node is published.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {% hide(content.field_example) %} to temporarily suppress the printing
+ *   of a given element.
+ * - question_url: Direct URL of the current node.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - chgk-question: The current template type (also known as a "theming hook").
+ *   - node-[type]: The current node type. For example, if the node is a
+ *     "Beskrylka" it would result in "chgk-question-beskrylka". 
+ *   - view-mode-[view_mode]: The View Mode of the question; for example, a teaser
+ *     would result in: "view-mode-teaser", and full: "view-mode-full".
+ *   - preview: Whether a node is in preview mode.
+ *   - unpublished: Appears on unpublished nodes visible only to site admins.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * In field variables, each field instance attached to the node a corresponding
+ * variable is defined; for example, 'node.body' becomes 'body'. When needing to
+ * access a field's raw values, developers/themers are strongly encouraged to
+ * use these variables. Otherwise they will have to explicitly specify the
+ * desired field language; for example, 'node.body.en', thus overriding any
+ * language negotiation rule that may have been applied previously.
+ *
+ * @see template_preprocess_chgk_question()
+ *
+ * @ingroup themeable
+ */
+#}                                         
+<article id="chgk-question-{{ question.id }}" class="{{ attributes.class }} clearfix"{{ attributes }}>
+
+  <div{{ content_attributes }}>
+    {# We hide links now so that we can render them later. #}
+    {% hide(content.links) %}
+    {{ content }}
+  </div>
+
+  {{ content.links }}
+
+</article>

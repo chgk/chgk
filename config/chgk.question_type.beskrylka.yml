@@ -1,0 +1,6 @@
+id: beskrylka
+label: Beskrylka
+description: Beskrylka &mdash; a verse puzzle. The gamer should guess the missed line using the context. The missed line should be an idiom, well known cite.
+settings: {  }
+status: true
+langcode: en

@@ -1,0 +1,6 @@
+id: chgk
+label: '"What? Where? When?" question'
+description: 'The question for "What? Where? When?" game. Basically consists of question and answer. Additionally can have fields for visial and video materials, the source of information, author, the additional right answer criteria.'
+settings: {  }
+status: true
+langcode: en

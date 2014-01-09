@@ -1,0 +1,32 @@
+id: chgk_question.field_razdatka_img
+status: true
+langcode: en
+name: field_razdatka_img
+entity_type: chgk_question
+type: image
+settings:
+  uri_scheme: public
+  default_image:
+    fid: null
+    alt: ''
+    title: ''
+    width: null
+    height: null
+  column_groups:
+    file:
+      label: File
+      columns:
+        - target_id
+        - width
+        - height
+    alt:
+      label: Alt
+      translatable: true
+    title:
+      label: Title
+      translatable: true
+module: image
+locked: false
+cardinality: 10
+translatable: false
+indexes: {  }

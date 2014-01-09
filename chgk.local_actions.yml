@@ -1,0 +1,5 @@
+chgk.question_type_add:
+  route_name: chgk.question_type_add
+  title: 'Add question type'
+  appears_on:
+    - chgk.overview_question_types

@@ -1,0 +1,5 @@
+id: chgk_question.full
+label: Full question
+status: '0'
+cache: '0'
+targetEntityType: chgk_question

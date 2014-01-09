@@ -1,0 +1,6 @@
+id: jeopardy
+label: Jeopardy!
+description: The set (category) of 5 questions for Jeopardy!
+settings: {  }
+status: true
+langcode: en

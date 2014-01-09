@@ -1,0 +1,8 @@
+name: ChGK
+type: module
+description: 'Adds the support for Chgk Questions, Answers and People entities '
+interface translation project: chgk
+interface translation server pattern: modules/chgk/translations/chgk.%language.po
+package: chgk
+version: VERSION
+core: 8.x

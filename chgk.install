@@ -1,0 +1,188 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the chgk module.
+ */
+
+
+/**
+ * Implements hook_schema().
+ */
+function chgk_schema() {
+  $schema['chgk_question'] = array(
+    'description' => 'Stores questions',
+    'fields' => array(
+      'qid' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique question ID.',
+      ),
+      'uuid' => array(
+        'description' => 'Unique Key: Universally unique identifier for this entity.',
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => FALSE,
+      ),
+      'type' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'The ID of the question type to which the question is assigned.',
+      ),
+      'uid' => array(
+        'description' => 'The {users}.uid that created this question.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp when the question was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'changed' => array(
+        'description' => 'The Unix timestamp when the question was most recently saved.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+
+    ),
+    'primary key' => array('qid'),
+    'unique keys' => array(
+      'uuid' => array('uuid'),
+    ),
+    'foreign keys' => array(
+      'question_author' => array(
+        'table' => 'users',
+        'columns' => array('uid' => 'uid'),
+      ),
+    ),
+  );
+
+  $schema['chgk_pack'] = array(
+    'description' => 'Stores question packs',
+    'fields' => array(
+      'pid' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique question pack ID.',
+      ),
+      'uuid' => array(
+        'description' => 'Unique Key: Universally unique identifier for this entity.',
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => FALSE,
+      ),
+      'uid' => array(
+        'description' => 'The {users}.uid that created this pack.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'title' => array(
+        'description' => 'Pack title',
+        'type' => 'varchar',
+        'length' => 256,
+        'default' => '',
+        'not null' => TRUE,        
+      ),
+      'type' => array(
+        'description' => 'The question pack type',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp when the question pack was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'changed' => array(
+        'description' => 'The Unix timestamp when the question pack was most recently saved.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'machine_name' => array(
+        'description' => 'Text ID for the pack for using in url',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => ''
+      ),
+      'parent' => array(
+        'desription' => 'The reference to the parent pack',
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+      'weight' => array(
+        'description' => 'Set weight among packs with the same parent',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+
+    ),
+    'primary key' => array('pid'),
+    'unique keys' => array(
+      'uuid' => array('uuid'),
+    ),
+  );
+
+  $schema['chgk_question_pack'] = array(
+    'description' => 'Stores the  relationship between question and question pack.',
+    'fields' => array(
+      'qid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => "Primary Key: The {chgk_question}.qid of the question",
+      ),
+      'pid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Primary Key: The {chgk_pack}.pid of the question pack.',
+      ),
+      'weight' => array(
+        'description' => 'Question weight among other questions of this pack',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'number' => array(
+        'description' => 'Question number in the pack',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'indexes' => array(
+      'pid' => array('pid'),
+    ),
+    'foreign keys' => array(
+      'chgk_question' => array(
+        'table' => 'chgk_question',
+        'columns' => array('qid' => 'qid'),
+      ),
+      'chgk_pack' => array(
+        'table' => 'chgk_pack',
+        'columns' => array('pid' => 'pid'),
+      ),
+    ),
+    'primary key' => array('qid', 'pid'),
+  );
+
+  return $schema;
+}

@@ -1,0 +1,234 @@
+<?php
+
+/**
+ * @file
+ * The module that distributes the functionality related to chgk
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Language\Language;
+use Drupal\Core\Cache\CacheBackendInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function chgk_theme() {
+  return array(
+    'chgk_question' => array(
+      'render element' => 'elements',
+      'template' => 'chgk_question',
+    ),
+    'chgk_question_add_list' => array(
+      'variables' => array('content' => NULL),
+      'file' => 'chgk.pages.inc',
+    ),
+
+  );
+}
+
+
+/**
+ * Implements hook_entity_bundle_info().
+ */
+function chgk_entity_bundle_info() {
+  $bundles = array();
+
+  $bundles['chgk_pack']['chgk_pack']['label'] = t('Pack');
+  return $bundles;
+
+  foreach (chgk_question_type_get_names() as $id => $label) {
+    $bundles['chgk_question'][$id]['label'] = $label;
+  }
+
+  return $bundles;
+}
+
+/**
+ * Menu argument loader: Loads a question type by string.
+ *
+ * @param $name
+ *   The machine name of a question type to load.
+ *
+ * @return \Drupal\chgk\QuestionTypeInterface
+ *   A question type object or NULL if $name does not exist.
+ */
+function chgk_question_type_load($name) {
+  return entity_load('chgk_question_type', $name);
+}
+
+/**
+ * Implements hook_menu().
+ */
+function chgk_menu() {
+  $items['admin/structure/question_types'] = array(
+    'title' => 'Question types',
+    'description' => 'Manage chgk question types, such as chgk, beskrylka, quiz',
+    'route_name' => 'chgk.overview_question_types',
+  );
+  $items['question/add'] = array(
+    'title' => 'Add question',
+    'route_name' => 'chgk.question_add_page',
+  );
+
+  $items['pack/add'] = array(
+    'title' => 'Add question pack',
+    'route_name' => 'chgk.pack_add',
+  );
+  
+  $items['question/add/%chgk_question_type'] = array(
+    'route_name' => 'chgk.question_add',
+  );
+
+  $items['question/%chgk_question'] = array(
+    'route_name' => 'chgk.question_view',
+  );
+
+  return $items;
+}
+  
+
+/**
+ * Returns a list of available question type names.
+ *
+ * @return array
+ *   An array of question type labels, keyed by the question type name.
+ */
+function chgk_question_type_get_names() {
+  $cid = 'chgk_question_type:names:' . language(Language::TYPE_INTERFACE)->id;
+  if ($cache = cache()->get($cid)) {
+    return $cache->data;
+  }
+  $types=entity_load_multiple('chgk_question_type');
+  foreach($types as $name=>$info) {
+    $names[$name] = $info->label;
+  }
+  cache()->set($cid, $names, CacheBackendInterface::CACHE_PERMANENT, array(
+    'chgk_question_type' => array_keys($names),
+    'chgk_question_types' => TRUE,
+  ));
+  return $names;
+}
+
+function chgk_permission() {
+  $perms = array(
+    'administer question types' => array(
+      'title' => t('Administer question types'),
+      'restrict access' => TRUE,
+    ),
+    'create questions' => array(
+      'title' => t('Create questions'),
+      'restrict access' => TRUE
+    ),
+    'edit questions' => array(
+      'title' => t('Edit questions'),
+      'restrict access' => TRUE
+    ),
+    'delete questions' => array(
+      'title' => t('Delete questions'),
+      'restrict access' => TRUE
+    ),
+  );
+  return $perms;
+}
+
+/**
+ * Entity URI callback.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $node
+ *   A node entity.
+ *
+ * @return array
+ *   An array with 'path' as the key and the path to the node as its value.
+ */
+function chgk_question_uri(EntityInterface $chgk_question) {
+  return array(
+    'path' => 'question/' . $chgk_question->id(),
+  );
+}
+
+/**
+ * Checks whether the current page is the full page view of the passed-in question.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $chgk_question
+ *   A chgk_question entity.
+ *
+ * @return
+ *   The ID of the question if this is a full page view, otherwise FALSE.
+ */
+function chgk_question_is_page(EntityInterface $chgk_question) {
+  $page_object = menu_get_object();
+  return (!empty($page_object) ? $page_object->id() == $chgk_question->id() : FALSE);
+}
+
+
+/**
+ * Prepares variables for node templates.
+ *
+ * Default template: node.html.twig.
+ *
+ * Most themes utilize their own copy of node.html.twig. The default is located
+ * inside "/core/modules/node/templates/node.html.twig". Look in there for the full
+ * list of variables.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An array of elements to display in view mode.
+ *   - node: The node object.
+ *   - view_mode: View mode; e.g., 'full', 'teaser'...
+ */
+function template_preprocess_chgk_question(&$variables) {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  $variables['question'] = $variables['elements']['#chgk_question'];
+  $question = $variables['question'];
+  $uri = $question->uri();
+  $variables['question_url']  = url($uri['path'], $uri['options']);
+  $variables['page'] = $variables['view_mode'] == 'full' && chgk_question_is_page($question);
+
+  // Helpful $content variable for templates.
+  $variables += array('content' => array());
+  foreach (element_children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+
+  field_attach_preprocess($question, $variables['content'], $variables);
+
+  // Add article ARIA role.
+  $variables['attributes']['role'] = 'article';
+
+  // Gather node classes.
+  $variables['attributes']['class'][] = 'chgk_question';
+  $variables['attributes']['class'][] = drupal_html_class('chgk-question-' . $question->bundle());
+  if ($variables['view_mode']) {
+    $variables['attributes']['class'][] = drupal_html_class('view-mode-' . $variables['view_mode']);
+  }
+  if (isset($variables['preview'])) {
+    $variables['attributes']['class'][] = 'preview';
+  }
+  $variables['content_attributes']['class'][] = 'content';
+}
+
+/**
+ * Implements hook_field_extra_fields().
+ */
+function chgk_field_extra_fields() {
+  $fields['chgk_pack']['chgk_pack']['form']['title'] = array(
+    'label' => t('Pack title'),
+    'description' => t('Chgk module questions pack form elements.'),
+    'weight' => -10,
+  );
+
+  $fields['chgk_pack']['chgk_pack']['form']['machine_name'] = array(
+    'label' => t('Pack title'),
+    'description' => t('Chgk module questions pack form elements.'),
+    'weight' => -10,
+  );
+  
+  
+  $fields['chgk_pack']['chgk_pack']['display']['title'] = array(
+    'label' => t('Pack title'),
+    'description' => t("Chgk module 'pack title' view element."),
+    'weight' => 5,
+  );
+
+  return $fields;
+}

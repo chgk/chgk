@@ -1,0 +1,25 @@
+chgk.question_type_edit:
+  title: 'Edit'
+  route_name: chgk.question_type_edit
+  base_route: chgk.question_type_edit
+chgk.overview_question_types:
+  title: List
+  route_name: chgk.overview_question_types
+  base_route: chgk.overview_question_types
+chgk.question_view:
+  route_name: chgk.question_view
+  base_route: chgk.question_view
+  weight: 0
+  title: 'View'
+chgk.question_edit:
+  route_name: chgk.question_edit
+  base_route: chgk.question_view
+  weight: 1
+  title: 'Edit'
+chgk.question_delete_confirm:
+  route_name: chgk.question_delete_confirm
+  base_route: chgk.question_view
+  weight: 2
+  title: 'Delete'
+
+

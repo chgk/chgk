@@ -1,0 +1,18 @@
+# Schema for the configuration files of the chgk module.
+
+chgk.question_type.*:
+  type: mapping
+  label: 'Question type'
+  mapping:
+    id:
+      type: string
+      label: 'Machine-readable name'
+    uuid:
+      type: string
+      label: 'UUID'
+    label:
+      type: label
+      label: 'Name'
+    description:
+      type: text
+      label: 'Description'

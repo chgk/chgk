@@ -44,32 +44,32 @@ class PackFormController extends ContentEntityFormController {
    * Overrides Drupal\Core\Entity\EntityFormController::save().
    */
   public function save(array $form, array &$form_state) {
-    $question = $this->entity;
+    $pack = $this->entity;
 
-    $insert = $question->isNew();
+    $insert = $pack ->isNew();
 
-    $question->save();
+    $pack->save();
     if ($insert) {
-      drupal_set_message(t('New question has been created.'));
+      drupal_set_message(t('New question pack has been created.'));
     }
     else {
-      drupal_set_message(t('Question has been updated.'));
+      drupal_set_message(t('Question pack has been updated.'));
     }
 
-    if ($question->id()) {
-      $form_state['values']['qid'] = $question->id();
-      $form_state['qid'] = $question->id();
+    if ($pack->id()) {
+      $form_state['values']['pid'] = $pack->id();
+      $form_state['pid'] = $pack->id();
       $form_state['redirect_route'] = array(
-        'route_name' => 'chgk.question_view',
+        'route_name' => 'chgk.pack_view',
         'route_parameters' => array(
-          'chgk_question' => $question->id(),
+          'chgk_pack' => $pack->id(),
         ),
       );
     }
     else {
       // In the unlikely case something went wrong on save, the node will be
       // rebuilt and question form redisplayed the same way as in preview.
-      drupal_set_message(t('The question could not be saved.'), 'error');
+      drupal_set_message(t('The question pack could not be saved.'), 'error');
       $form_state['rebuild'] = TRUE;
     }
 

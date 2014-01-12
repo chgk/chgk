@@ -84,3 +84,11 @@ chgk.pack_settings:
     _title: 'Pack settings'
   requirements:
     _permission: 'administer question packs'
+
+chgk.pack_view:
+  path: '/question/{chgk_question}'
+  defaults:
+    _content: '\Drupal\chgk\Controller\QuestionController::page'
+    _title_callback: '\Drupal\chgk\Controller\QuestionController::pageTitle'
+  requirements:
+    _permission: 'access content'

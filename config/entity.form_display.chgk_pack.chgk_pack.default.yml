@@ -8,27 +8,27 @@ content:
     weight: -10
   machine_name:
     weight: -10
-  field_nacalo_turnira:
+  date_start:
     weight: -9
     settings: {  }
     type: datetime_default
-  field_zaversenie_turnira:
+  date_finish:
     weight: -8
     settings: {  }
     type: datetime_default
-  field_korotkoe_nazvanie_paketa:
+  short_title:
     weight: -7
     settings:
       size: '60'
       placeholder: ''
     type: text_textfield
-  field_redaktory:
+  editors:
     weight: -6
     settings:
       size: '60'
       placeholder: ''
     type: text_textfield
-  field_informacia:
+  pack_info:
     weight: -5
     settings:
       rows: '5'

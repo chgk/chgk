@@ -6,29 +6,29 @@ mode: default
 content:
   title:
     weight: 5
-  field_nacalo_turnira:
+  date_start:
     weight: 6
     label: above
     settings:
       format_type: medium
     type: datetime_default
-  field_zaversenie_turnira:
+  date_finish:
     weight: 7
     label: above
     settings:
       format_type: medium
     type: datetime_default
-  field_korotkoe_nazvanie_paketa:
+  machine_name:
     weight: 8
     label: above
     settings: {  }
     type: text_default
-  field_redaktory:
+  editors:
     weight: 9
     label: above
     settings: {  }
     type: text_default
-  field_informacia:
+  pack_info:
     weight: 10
     label: above
     settings: {  }

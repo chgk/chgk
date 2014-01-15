@@ -190,7 +190,7 @@ function template_preprocess_chgk_question(&$variables) {
     $variables['content'][$key] = $variables['elements'][$key];
   }
 
-  field_attach_preprocess($question, $variables['content'], $variables);
+//  field_attach_preprocess($question, $variables['content'], $variables);
 
   // Add article ARIA role.
   $variables['attributes']['role'] = 'article';
@@ -212,20 +212,20 @@ function template_preprocess_chgk_question(&$variables) {
  */
 function chgk_field_extra_fields() {
   $fields['chgk_pack']['chgk_pack']['form']['title'] = array(
-    'label' => t('Pack title'),
-    'description' => t('Chgk module questions pack form elements.'),
+    'label' => t('Название пакета'),
+    'description' => t('Название пакета'),
     'weight' => -10,
   );
 
   $fields['chgk_pack']['chgk_pack']['form']['machine_name'] = array(
-    'label' => t('Pack title'),
+    'label' => t('Машинное имя'),
     'description' => t('Chgk module questions pack form elements.'),
     'weight' => -10,
   );
   
   
   $fields['chgk_pack']['chgk_pack']['display']['title'] = array(
-    'label' => t('Pack title'),
+    'label' => t('Название пакета'),
     'description' => t("Chgk module 'pack title' view element."),
     'weight' => 5,
   );

@@ -1,0 +1,14 @@
+id: chgk_pack.editors
+uuid: e12fc115-ccda-45db-b300-afaae4f5c3e5
+status: true
+langcode: ru
+name: editors
+entity_type: chgk_pack
+type: text
+settings:
+  max_length: 255
+module: text
+locked: false
+cardinality: 1
+translatable: false
+indexes: {  }

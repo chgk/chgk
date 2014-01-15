@@ -1,0 +1,14 @@
+id: chgk_pack.date_finish
+uuid: f12d6317-4a8e-49fa-b500-be60059d72cd
+status: true
+langcode: ru
+name: date_finish
+entity_type: chgk_pack
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: false
+indexes: {  }

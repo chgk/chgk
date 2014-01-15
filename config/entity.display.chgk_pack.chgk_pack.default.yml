@@ -1,0 +1,37 @@
+id: chgk_pack.chgk_pack.default
+uuid: 8bbe54b9-e6a1-4d26-8400-ee95d7175716
+targetEntityType: chgk_pack
+bundle: chgk_pack
+mode: default
+content:
+  title:
+    weight: 5
+  field_nacalo_turnira:
+    weight: 6
+    label: above
+    settings:
+      format_type: medium
+    type: datetime_default
+  field_zaversenie_turnira:
+    weight: 7
+    label: above
+    settings:
+      format_type: medium
+    type: datetime_default
+  field_korotkoe_nazvanie_paketa:
+    weight: 8
+    label: above
+    settings: {  }
+    type: text_default
+  field_redaktory:
+    weight: 9
+    label: above
+    settings: {  }
+    type: text_default
+  field_informacia:
+    weight: 10
+    label: above
+    settings: {  }
+    type: text_default
+hidden: {  }
+status: true

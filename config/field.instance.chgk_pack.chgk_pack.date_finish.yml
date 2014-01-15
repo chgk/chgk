@@ -1,0 +1,15 @@
+id: chgk_pack.chgk_pack.date_finish
+uuid: 1257c1c6-3f00-4957-b75d-931151abb47f
+status: true
+langcode: ru
+field_uuid: f12d6317-4a8e-49fa-b500-be60059d72cd
+field_name: date_finish
+entity_type: chgk_pack
+bundle: chgk_pack
+label: 'Дата завершения турнира'
+description: 'Оставьте это поле пустым, если турнир однодневный'
+required: false
+default_value: {  }
+default_value_function: ''
+settings: {  }
+field_type: datetime

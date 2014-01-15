@@ -1,0 +1,14 @@
+id: chgk_pack.short_title
+uuid: 7b33dc86-2c7f-4dec-9305-5b9f9214ba6f
+status: true
+langcode: ru
+name: short_title
+entity_type: chgk_pack
+type: text
+settings:
+  max_length: 32
+module: text
+locked: false
+cardinality: 1
+translatable: false
+indexes: {  }

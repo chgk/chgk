@@ -1,0 +1,16 @@
+id: chgk_pack.chgk_pack.short_title
+uuid: 774c1292-acfc-4579-b555-8524e4340304
+status: true
+langcode: ru
+field_uuid: 7b33dc86-2c7f-4dec-9305-5b9f9214ba6f
+field_name: short_title
+entity_type: chgk_pack
+bundle: chgk_pack
+label: 'Короткое название пакета'
+description: 'Короткое имя пакета. Испольуется в навигации. Например "Кубок провинций-2008", "ОВСЧ-2008, 1 тур"'
+required: false
+default_value: {  }
+default_value_function: ''
+settings:
+  text_processing: '0'
+field_type: text

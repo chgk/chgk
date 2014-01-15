@@ -20,7 +20,7 @@ class PackFormController extends ContentEntityFormController {
    * Overrides Drupal\Core\Entity\EntityFormController::form().
    */
   public function form(array $form, array &$form_state) {
-    $question = $this->entity;
+    $pack = $this->entity;
     // Basic question information.
     // These elements are just values so they are not even sent to the client.
     foreach (array('pid', 'type', 'uid') as $key) {
@@ -29,6 +29,32 @@ class PackFormController extends ContentEntityFormController {
         '#value' => isset($question->$key) ? $question->$key : NULL,
       );
     }
+
+    $form['title'] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Title'),
+      '#default_value' => $pack->title->value,
+      '#description' => $this->t('Полное название пакета. Например &laquo;Международный синхронный турнир "15-й Открытый Кубок России". 1 тур&raquo;'),
+      '#maxlength' => 255,
+      '#required' => TRUE,
+      '#weight' => -5,
+    );
+
+    
+  $form['machine_name'] = array(
+      '#title'       => 'Текстовый идентификатор',
+      '#type'        => 'textfield',
+      '#required'    => TRUE,
+      '#maxlength' => 20,
+      '#weight'      => -3,
+      '#default_value'=>$pack->machine_name->value,
+      '#description' => $this->t('Состоит из латинских букв, цифр, дефиса, точки. Точкой отделяется номер тура. Рекомендуемый формат: имя, две цифры на год, символ подчёркивания, номер тура. Например "province08","ovsch08-3.1"'),
+  );
+
+
+
+//  
+
     // This form uses a button-level #submit handler for the form's main submit
     // action. node_form_submit() manually invokes all form-level #submit
     // handlers of the form. Without explicitly setting #submit, Form API would
@@ -36,7 +62,7 @@ class PackFormController extends ContentEntityFormController {
     // button-level #submit handler for the 'Save' action.
     $form += array('#submit' => array());
 
-    $form = parent::form($form, $form_state, $question);
+    $form = parent::form($form, $form_state, $pack);
     return $form;
   }
 

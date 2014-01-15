@@ -1,0 +1,38 @@
+id: chgk_pack.chgk_pack.default
+uuid: f4e045e0-7406-406e-af0d-132dff09564a
+targetEntityType: chgk_pack
+bundle: chgk_pack
+mode: default
+content:
+  title:
+    weight: -10
+  machine_name:
+    weight: -10
+  field_nacalo_turnira:
+    weight: -9
+    settings: {  }
+    type: datetime_default
+  field_zaversenie_turnira:
+    weight: -8
+    settings: {  }
+    type: datetime_default
+  field_korotkoe_nazvanie_paketa:
+    weight: -7
+    settings:
+      size: '60'
+      placeholder: ''
+    type: text_textfield
+  field_redaktory:
+    weight: -6
+    settings:
+      size: '60'
+      placeholder: ''
+    type: text_textfield
+  field_informacia:
+    weight: -5
+    settings:
+      rows: '5'
+      placeholder: ''
+    type: text_textarea
+hidden: {  }
+status: true

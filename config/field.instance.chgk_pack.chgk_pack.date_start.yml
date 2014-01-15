@@ -1,0 +1,15 @@
+id: chgk_pack.chgk_pack.date_start
+uuid: ae6b0cbf-b85b-45c7-b100-c44e808b1088
+status: true
+langcode: ru
+field_uuid: 01987f29-ee54-40fc-9a00-e03d297a06ac
+field_name: date_start
+entity_type: chgk_pack
+bundle: chgk_pack
+label: 'Дата начала турнира'
+description: 'Это поле можно оставить пустым, если пакет вопросов не связан с конкретным турниром. '
+required: false
+default_value: {  }
+default_value_function: ''
+settings: {  }
+field_type: datetime

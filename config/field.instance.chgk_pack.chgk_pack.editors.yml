@@ -1,9 +1,9 @@
-id: chgk_pack.chgk_pack.field_redaktory
+id: chgk_pack.chgk_pack.editors
 uuid: 78e5e9ef-4f2a-4c0f-b300-d101c4e7357b
 status: true
 langcode: ru
 field_uuid: e12fc115-ccda-45db-b300-afaae4f5c3e5
-field_name: field_redaktory
+field_name: editors
 entity_type: chgk_pack
 bundle: chgk_pack
 label: Редакторы

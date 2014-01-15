@@ -1,9 +1,9 @@
-id: chgk_pack.chgk_pack.info
+id: chgk_pack.chgk_pack.pack_info
 uuid: cbe1a4a0-2acb-4024-bb00-c70ba87b209a
 status: true
 langcode: ru
 field_uuid: c237671f-dfd9-45b2-b523-35a360fd1b23
-field_name: info
+field_name: pack_info
 entity_type: chgk_pack
 bundle: chgk_pack
 label: Информация

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\taxonomy\TermInterface.
+ * Contains Drupal\chgk\QuestionInterface.
  */
 
 namespace Drupal\chgk;

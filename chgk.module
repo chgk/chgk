@@ -232,3 +232,4 @@ function chgk_field_extra_fields() {
 
   return $fields;
 }
+

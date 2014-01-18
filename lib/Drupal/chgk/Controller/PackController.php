@@ -9,7 +9,7 @@ namespace Drupal\chgk\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\chgk\QuestionTypeInterface;
-use Drupal\chgk\QuestionInterface;
+use Drupal\chgk\PackInterface;
 
 
 /**
@@ -27,7 +27,7 @@ class PackController extends ControllerBase {
    * @return array
    *   An array suitable for drupal_render().
    */
-  public function page(QuestionInterface $chgk_pack) {
+  public function page(PackInterface $chgk_pack) {
     $build = $this->buildPage($chgk_pack);
     foreach ($chgk_pack->uriRelationships() as $rel) {      
       $uri = $chgk_pack->uri($rel);
@@ -51,8 +51,8 @@ class PackController extends ControllerBase {
    * @return string
    *   The page title.
    */
-  public function pageTitle(QuestionInterface $chgk_pack) {
-    return $chgk_pack->id();
+  public function pageTitle(PackInterface $chgk_pack) {
+    return $chgk_pack->label();
   }
 
   /**

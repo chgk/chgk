@@ -11,9 +11,16 @@ use Drupal\chgk\QuestionAccessController;
 use Drupal\Tests\UnitTestCase;
 use Drupal\system\Tests\Entity\EntityUnitTestBase;
 use Drupal\Core\Language\Language;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Drupal\Core\Entity\EntityAccessCheck;
+
 
 /**
- * Tests the node bulk form plugin.
+ * Tests the questions access controller
+ *
+ * @group Drupal
+ * @group chgk
  *
  * @see Drupal\chgk\QuestionAccessController
  */
@@ -53,6 +60,7 @@ class QuestionAccessControllerTest extends UnitTestCase {
     $this->assertFalse($this->questionAccessController->access($this->question, 'update', Language::LANGCODE_DEFAULT, $account));
     $this->assertFalse($this->questionAccessController->access($this->question, 'view', Language::LANGCODE_DEFAULT, $account));
     $this->assertFalse($this->questionAccessController->access($this->question, 'delete', Language::LANGCODE_DEFAULT, $account));
+    $this->assertFalse($this->questionAccessController->access($this->question, 'unexisting permission', Language::LANGCODE_DEFAULT, $account));
 
     $account = $this->getAccountMock('access content');
     $this->assertTrue($this->questionAccessController->access($this->question, 'view', Language::LANGCODE_DEFAULT, $account));
@@ -64,13 +72,29 @@ class QuestionAccessControllerTest extends UnitTestCase {
     $this->assertTrue($this->questionAccessController->access($this->question, 'delete', Language::LANGCODE_DEFAULT, $account));
 
   }
-  
-  public function checkCreateAccess() {
+
+  public function testCreateAccess() {
     $account = $this->getAccountMock();
     $this->assertFalse($this->questionAccessController->createAccess(NULL, $account));
     $account = $this->getAccountMock('create questions');
     $this->assertTrue($this->questionAccessController->createAccess(NULL, $account));
 
+  }
+  
+  public function testRoute() {
+    $route = new Route('/foo', array(), array('_entity_access' => 'chgk_question.update'));
+    $account = $this->getAccountMock();
+    $request = new Request();
+    $question = $this->getMockBuilder('Drupal\chgk\Entity\Question')
+                           ->disableOriginalConstructor()
+                                 ->getMock();
+    $question->expects($this->any())
+                                     ->method('access')
+                                       ->will($this->returnValue(TRUE));
+   $access_check = new EntityAccessCheck();
+                        $request->attributes->set('chgk_question', $question);
+                        $access = $access_check->access($route, $request, $account);
+                        $this->assertEquals(TRUE, $access);
   }
 }
 

@@ -77,6 +77,14 @@ chgk.pack_add:
   requirements:
     _permission: 'create questions'
 
+chgk.pack_add_child:
+  path: '/pack/add/{chgk_pack}'
+  defaults:
+    _entity_form: 'chgk_pack.add'
+    _title: 'Add subpack'
+  requirements:
+    _permission: 'create questions'
+
 chgk.pack_settings:
   path: '/admin/config/chgk/packs'
   defaults:

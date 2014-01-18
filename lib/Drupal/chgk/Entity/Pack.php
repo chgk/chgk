@@ -33,7 +33,8 @@ use Drupal\Core\Entity\EntityStorageControllerInterface;
  *   translatable = TRUE,
  *   entity_keys = {
  *     "id" = "pid",
- *     "uuid" = "uuid"
+ *     "uuid" = "uuid",
+ *     "label" = "title",
  *   },
  *   links = {
  *     "canonical" = "chgk.pack_view",

@@ -24,9 +24,6 @@ class QuestionAccessController extends EntityAccessController {
   protected function checkAccess(EntityInterface $entity, $operation, $langcode, AccountInterface $account) {
     switch ($operation) {
       case 'view':
-      $r = $account->hasPermission('access content');
- 
-      var_dump($r);
         return $account->hasPermission('access content');
         break;
 

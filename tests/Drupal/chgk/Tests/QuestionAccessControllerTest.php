@@ -80,7 +80,5 @@ class QuestionAccessControllerTest extends UnitTestCase {
     $this->assertTrue($this->questionAccessController->createAccess(NULL, $account));
 
   }
-  
-  
 }
 

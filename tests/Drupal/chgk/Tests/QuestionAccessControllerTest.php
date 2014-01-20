@@ -81,20 +81,6 @@ class QuestionAccessControllerTest extends UnitTestCase {
 
   }
   
-  public function testRoute() {
-    $route = new Route('/foo', array(), array('_entity_access' => 'chgk_question.update'));
-    $account = $this->getAccountMock();
-    $request = new Request();
-    $question = $this->getMockBuilder('Drupal\chgk\Entity\Question')
-                           ->disableOriginalConstructor()
-                                 ->getMock();
-    $question->expects($this->any())
-                                     ->method('access')
-                                       ->will($this->returnValue(TRUE));
-   $access_check = new EntityAccessCheck();
-                        $request->attributes->set('chgk_question', $question);
-                        $access = $access_check->access($route, $request, $account);
-                        $this->assertEquals(TRUE, $access);
-  }
+  
 }
 

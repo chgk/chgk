@@ -18,11 +18,18 @@ function chgk_theme() {
       'render element' => 'elements',
       'template' => 'chgk_question',
     ),
+    'chgk_pack' => array(
+      'render element' => 'elements',
+      'template' => 'chgk_pack',
+    ),
+
     'chgk_question_add_list' => array(
       'variables' => array('content' => NULL),
       'file' => 'chgk.pages.inc',
     ),
-
+    'tour_widget' => array(
+      'render element' => 'elements',
+    ),
   );
 }
 
@@ -207,6 +214,34 @@ function template_preprocess_chgk_question(&$variables) {
   $variables['content_attributes']['class'][] = 'content';
 }
 
+function template_preprocess_chgk_pack(&$variables) {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  $pack = $variables['pack'] = $variables['elements']['#chgk_pack'];
+//  $question = $variables['question'];
+  $uri = $pack->uri();
+  $variables['pack_url']  = url($uri['path'], $uri['options']);
+  $variables['page'] = $variables['view_mode'] == 'full' && chgk_question_is_page($question);
+
+  // Helpful $content variable for templates.
+  $variables += array('content' => array());
+  foreach (element_children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+
+  // Add article ARIA role.
+  $variables['attributes']['role'] = 'article';
+
+  // Gather node classes.
+  $variables['attributes']['class'][] = 'chgk_pack';
+  if ($variables['view_mode']) {
+    $variables['attributes']['class'][] = drupal_html_class('view-mode-' . $variables['view_mode']);
+  }
+  if (isset($variables['preview'])) {
+    $variables['attributes']['class'][] = 'preview';
+  }
+  $variables['content_attributes']['class'][] = 'content';
+}
+
 /**
  * Implements hook_field_extra_fields().
  */
@@ -228,6 +263,12 @@ function chgk_field_extra_fields() {
     'label' => t('Название пакета'),
     'description' => t("Chgk module 'pack title' view element."),
     'weight' => 5,
+  );
+
+  $fields['chgk_pack']['chgk_pack']['display']['tours'] = array(
+    'label' => t('Туры'),
+    'description' => t("Туры"),
+    'weight' => 6,
   );
 
   return $fields;

@@ -10,7 +10,7 @@ namespace Drupal\chgk\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\chgk\QuestionTypeInterface;
 use Drupal\chgk\PackInterface;
-
+use Drupal\chgk\PackManager;
 
 /**
  * Returns responses for Node routes.
@@ -29,6 +29,7 @@ class PackController extends ControllerBase {
    */
   public function page(PackInterface $chgk_pack) {
     $build = $this->buildPage($chgk_pack);
+    unset($build['packs']['#cache']);
     foreach ($chgk_pack->uriRelationships() as $rel) {      
       $uri = $chgk_pack->uri($rel);
       // Set the node path as the canonical URL to prevent duplicate content.
@@ -64,10 +65,25 @@ class PackController extends ControllerBase {
    * @return array
    *   An array suitable for drupal_render().
    */
-  protected function buildPage(QuestionInterface $chgk_question) {
-    return array('questions' => $this->entityManager()->getViewBuilder('chgk_question')->view($chgk_question)
+  protected function buildPage(QuestionInterface $chgk_pack) {
+    $viewBuilder = $this->entityManager()->getViewBuilder('chgk_pack');
+    return array(
+      'packs' => $this->entityManager()->getViewBuilder('chgk_pack')->view($chgk_pack)
     );
   }
 
+  /**
+   * {inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static($container->get('pack.manager'));
+  }
 
+  public function addChild( PackInterface $chgk_pack ) {
+    $new_pack = $this->entityManager()->getStorageController('chgk_pack')->create(array(
+      'parent' => $chgk_pack->id(),
+      'uid' => $chgk_pack->uid->value
+    ));
+    return $this->entityManager()->getForm($new_pack, 'add');
+  }
 }

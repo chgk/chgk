@@ -21,7 +21,6 @@ class QuestionTypeFormController extends EntityFormController {
    */
   public function form(array $form, array &$form_state) {
     $form = parent::form($form, $form_state);
-
     $type = $this->entity;
     if ($this->operation == 'add') {
       $form['#title'] = String::checkPlain($this->t('Add question type'));

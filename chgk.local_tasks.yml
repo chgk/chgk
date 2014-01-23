@@ -21,5 +21,18 @@ chgk.question_delete_confirm:
   base_route: chgk.question_view
   weight: 2
   title: 'Delete'
-
-
+chgk.pack_view:
+  route_name: chgk.pack_view
+  base_route: chgk.pack_view
+  weight: 0
+  title: 'View'
+chgk.pack_edit:
+  route_name: chgk.pack_edit
+  base_route: chgk.pack_view
+  weight: 1
+  title: 'Edit'
+chgk.pack_delete_confirm:
+  route_name: chgk.pack_delete_confirm
+  base_route: chgk.pack_view
+  weight: 2
+  title: 'Delete'

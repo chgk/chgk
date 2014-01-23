@@ -37,6 +37,6 @@ class ChgkLocalTasksTest extends LocalTaskIntegrationTest {
     $this->assertLocalTasks('chgk.question_type_edit', array(array('chgk.question_type_edit')));
     $this->assertLocalTasks('chgk.overview_question_types', array(array('chgk.overview_question_types')));
     $this->assertLocalTasks('chgk.question_view', array(array('chgk.question_view', 'chgk.question_edit', 'chgk.question_delete_confirm')));
-
+    $this->assertLocalTasks('chgk.pack_view', array(array('chgk.pack_view', 'chgk.pack_edit', 'chgk.pack_delete_confirm')));
   }
 }

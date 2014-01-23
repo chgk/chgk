@@ -20,16 +20,17 @@ class PackFormController extends ContentEntityFormController {
    * Overrides Drupal\Core\Entity\EntityFormController::form().
    */
   public function form(array $form, array &$form_state) {
+    $request = $this->getRequest();
     $pack = $this->entity;
     // Basic question information.
     // These elements are just values so they are not even sent to the client.
-    foreach (array('pid', 'type', 'uid') as $key) {
+//    print_r($pack->parent->entity);
+    foreach (array('pid', 'type', 'uid', 'parent') as $key) {
       $form[$key] = array(
         '#type' => 'value',
-        '#value' => isset($question->$key) ? $question->$key : NULL,
+        '#value' => isset($pack->$key) ? $pack->$key : NULL,
       );
     }
-
     $form['title'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Title'),
@@ -41,7 +42,7 @@ class PackFormController extends ContentEntityFormController {
     );
 
     
-  $form['machine_name'] = array(
+   $form['machine_name'] = array(
       '#title'       => 'Текстовый идентификатор',
       '#type'        => 'textfield',
       '#required'    => TRUE,
@@ -51,6 +52,17 @@ class PackFormController extends ContentEntityFormController {
       '#description' => $this->t('Состоит из латинских букв, цифр, дефиса, точки. Точкой отделяется номер тура. Рекомендуемый формат: имя, две цифры на год, символ подчёркивания, номер тура. Например "province08","ovsch08-3.1"'),
   );
 
+/*  $form['tours'] = array(
+      '#type' => 'table',
+      '#header' => array(t('Тур')),
+      '#empty' => t('В этом пакете нет туров'),
+      '#tableselect' => FALSE,
+      '#tabledrag' => TRUE,
+      '#tree' => TRUE,
+ );
+ foreach (array(1,2,3,4)) {
+ }
+*/
 
 
 //  
@@ -71,9 +83,7 @@ class PackFormController extends ContentEntityFormController {
    */
   public function save(array $form, array &$form_state) {
     $pack = $this->entity;
-
     $insert = $pack ->isNew();
-
     $pack->save();
     if ($insert) {
       drupal_set_message(t('New question pack has been created.'));
@@ -103,4 +113,14 @@ class PackFormController extends ContentEntityFormController {
     cache_invalidate_tags(array('content' => TRUE));
   }
 
+  protected function prepareEntity() {
+/*    $pack = $this->entity;
+    if ( $pack->getUserId() == 0 ) {
+      if ($this->parent->value) {
+        $pack->setUserId($this->parent->value);
+      } else {
+        $pack->setUserId(\Drupal::currentUser()->id());
+      }
+    }*/
+  }
 }

@@ -80,8 +80,8 @@ chgk.pack_add:
 chgk.pack_add_child:
   path: '/pack/add/{chgk_pack}'
   defaults:
-    _entity_form: 'chgk_pack.add'
-    _title: 'Add subpack'
+    _content: '\Drupal\chgk\Controller\PackController::addChild'
+    _title: 'Добавить тур'
   requirements:
     _permission: 'create questions'
 
@@ -107,3 +107,10 @@ chgk.pack_edit:
     _entity_form: 'chgk_pack.edit'
   requirements:
     _entity_access: 'chgk_pack.update'
+
+chgk.pack_delete_confirm:
+  path: '/pack/{chgk_pack}/delete'
+  defaults:
+    _entity_form: 'chgk_pack.delete'
+  requirements:
+    _entity_access: 'chgk_pack.delete'

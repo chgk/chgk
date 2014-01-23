@@ -18,11 +18,12 @@ use Drupal\Core\Entity\EntityStorageControllerInterface;
  *   id = "chgk_pack",
  *   label = @Translation("Chgk Question Pack"),
  *   controllers = {
- *     "storage" = "Drupal\Core\Entity\FieldableDatabaseStorageController",
+ *     "storage" = "Drupal\chgk\PackStorageController",
  *     "view_builder" = "Drupal\chgk\PackViewBuilder",
  *     "access" = "Drupal\chgk\PackAccessController",
  *     "form" = {
  *       "add" = "Drupal\chgk\PackFormController",
+ *       "default" = "Drupal\chgk\PackFormController",
  *       "delete" = "Drupal\chgk\Form\PackDeleteForm",
  *       "edit" = "Drupal\chgk\PackFormController"
  *     },
@@ -71,6 +72,9 @@ class Pack extends ContentEntityBase implements PackInterface {
     if (empty($values['created'])) {
       $values['created'] = REQUEST_TIME;
     }
+    if ( empty($values['uid']) ) {
+      $values['uid'] = \Drupal::currentUser()->id();
+    }
   }
 
   /**
@@ -95,11 +99,28 @@ class Pack extends ContentEntityBase implements PackInterface {
       ->setLabel(t('UUID'))
       ->setDescription(t('The pack UUID.'))
       ->setReadOnly(TRUE);
-     $fields['uid'] = FieldDefinition::create('entity_reference')
+
+    $fields['uid'] = FieldDefinition::create('entity_reference')
       ->setLabel(t('User ID'))
       ->setDescription(t('The user ID of the set creator.'))
       ->setSettings(array(
         'target_type' => 'user',
+        'default_value' => 0,
+      ));
+
+    $fields['parent'] = FieldDefinition::create('entity_reference')
+      ->setLabel(t('Пакет-родитель'))
+      ->setDescription(t('Идентификатор родительского пакета'))
+      ->setSettings(array(
+        'target_type' => 'chgk_pack',
+        'default_value' => 0,
+      ));
+
+    $fields['tours'] = FieldDefinition::create('entity_reference')
+      ->setLabel(t('Туры1'))
+      ->setDescription(t('Туры1'))
+      ->setSettings(array(
+        'target_type' => 'chgk_pack',
         'default_value' => 0,
       ));
 
@@ -161,6 +182,15 @@ class Pack extends ContentEntityBase implements PackInterface {
    */
   public function getUser() {
     return $this->get('uid')->entity;
+  }
+
+  public function setUserId( $uid ) {
+    $this->set('uid', $uid);
+    return $this;
+  }
+  
+  public function getTours() {
+    
   }
 
 }

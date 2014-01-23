@@ -1,0 +1,22 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a node.
+ *
+ * Available variables:
+ *
+ * @see template_preprocess_chgk_pack()
+ *
+ * @ingroup themeable
+ */
+#}                                         
+<article id="chgk-pack-{{ pack.id }}" class="{{ attributes.class }} clearfix"{{ attributes }}>
+  <div{{ content_attributes }}>
+    {# We hide links now so that we can render them later. #}
+    {% hide(content.links) %}
+    {{ content }}
+  </div>
+
+  {{ content.links }}
+
+</article>

@@ -57,7 +57,7 @@ class QuestionController extends ControllerBase {
     $account = $this->currentUser();
     $question = $this->entityManager()->getStorageController('chgk_question')->create(array(
       'type' => $chgk_question_type->id(),
-      'uid' => $account->id(),      
+      'uid' => $account->id(),
     ));
     $form = $this->entityManager()->getForm($question);
 

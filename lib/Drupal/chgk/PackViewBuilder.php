@@ -18,9 +18,13 @@ class PackViewBuilder extends EntityViewBuilder {
    */
   public function buildContent(array $entities, array $displays, $view_mode, $langcode = NULL) {
     parent::buildContent($entities, $displays, $view_mode, $langcode);
-
+    if ($displays['chgk_pack']->getComponent('tours')) {
+      $this->buildTours();
+    }
+  }
+  
+  private function buildTours() {
     $storage = $this->entityManager->getStorageController('chgk_pack');
-    
     foreach ($entities as $entity) {
       $tours = $entity->get('tours');
       foreach ($tours as $delta => $tour) {
@@ -40,5 +44,4 @@ class PackViewBuilder extends EntityViewBuilder {
       $entity->content['tours'] = $elements;
     }
   }
-
 }

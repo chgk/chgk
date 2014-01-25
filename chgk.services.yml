@@ -1,0 +1,8 @@
+services:
+  chgk.path_processor:
+    class: Drupal\chgk\PathProcessor
+    tags:
+      - { name: path_processor_inbound, priority: 100 }
+      - { name: path_processor_outbound, priority: 300 }
+    arguments: ['@entity.manager']
+

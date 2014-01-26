@@ -10,6 +10,7 @@ namespace Drupal\chgk\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\chgk\QuestionTypeInterface;
 use Drupal\chgk\QuestionInterface;
+use Drupal\chgk\PackInterface;
 
 
 /**
@@ -60,6 +61,27 @@ class QuestionController extends ControllerBase {
       'uid' => $account->id(),
     ));
     $form = $this->entityManager()->getForm($question);
+
+
+    return $form;
+  }
+
+  /**
+   * Provides the question submission form for a pack.
+   *
+   * @param \Drupal\chgk\QuestionTypeInterface $question_type
+   *   The question type entity for the node.
+   *
+   * @return array
+   *   A question submission form.
+   */
+  public function addChild(QuestionTypeInterface $chgk_question_type, PackInterface $chgk_pack) {
+    $account = $this->currentUser();
+    $question = $this->entityManager()->getStorageController('chgk_question')->create(array(
+      'type' => $chgk_question_type->id(),
+      'uid' => $account->id(),
+    ));
+    $form = $this->entityManager()->getForm($question, 'add', array('parent'=>$chgk_pack));
 
 
     return $form;

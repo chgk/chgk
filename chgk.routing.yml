@@ -46,6 +46,14 @@ chgk.question_add:
   requirements:
     _permission: 'create questions'
 
+chgk.question_add_child:
+  path: '/question/add/{chgk_question_type}/{chgk_pack}'
+  defaults:
+    _content: '\Drupal\chgk\Controller\QuestionController::addChild'
+    _title: 'Добавить вопрос'
+  requirements:
+    _permission: 'create questions'
+
 chgk.question_edit:
   path: '/question/{chgk_question}/edit'
   defaults:

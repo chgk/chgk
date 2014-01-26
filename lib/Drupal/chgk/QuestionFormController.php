@@ -29,6 +29,15 @@ class QuestionFormController extends ContentEntityFormController {
         '#value' => isset($question->$key) ? $question->$key : NULL,
       );
     }
+    
+    if ($form_state['parent']) {
+      $form['pack_title'] = array(
+        '#type' => 'item',
+        '#weight' => -100,
+        '#title' => t('Пакет'),
+        '#markup' => $form_state['parent']->title->value.' '
+      );
+    }
     // This form uses a button-level #submit handler for the form's main submit
     // action. node_form_submit() manually invokes all form-level #submit
     // handlers of the form. Without explicitly setting #submit, Form API would

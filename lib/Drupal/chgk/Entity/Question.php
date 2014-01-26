@@ -19,13 +19,14 @@ use Drupal\Core\Entity\EntityStorageControllerInterface;
  *   label = @Translation("Chgk Question"),
  *   bundle_label = @Translation("Question Type"),
  *   controllers = {
- *     "storage" = "Drupal\Core\Entity\FieldableDatabaseStorageController",
+ *     "storage" = "Drupal\chgk\QuestionStorageController",
  *     "view_builder" = "Drupal\chgk\QuestionViewBuilder",
  *     "access" = "Drupal\chgk\QuestionAccessController",
  *     "form" = {
  *       "default" = "Drupal\chgk\QuestionFormController",
  *       "delete" = "Drupal\chgk\Form\QuestionDeleteForm",
- *       "edit" = "Drupal\chgk\QuestionFormController"
+ *       "edit" = "Drupal\chgk\QuestionFormController",
+ *       "add" = "Drupal\chgk\QuestionFormController"
  *     },
  *     "translation" = "Drupal\chgk\QuestionTranslationController"
  *   },

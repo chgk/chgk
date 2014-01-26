@@ -62,7 +62,7 @@ class PackStorageController extends FieldableDatabaseStorageController implement
     $query->addExpression('COUNT(*)', 'tour_count');
     return $query;
   }
-  
+
   protected function doLoadFieldItems($entities, $age) {
     parent::doLoadFieldItems($entities, $age);
     $ids = array_keys($entities);

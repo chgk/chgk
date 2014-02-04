@@ -1,0 +1,21 @@
+.chgk-pack-edit-form .operations {
+  margin: 10px 0 0 0;
+  padding: 0;
+
+}
+.chgk-pack-edit-form .operations li {
+  float: left; /* LTR */
+  margin: 0;
+/*  margin-top:5px;*/
+  padding: 5px 0.7em;
+  list-style-type: none;
+  border-right: 1px solid #cdcdcd;  /* LTR */
+}
+.chgk-pack-edit-form .operations li:last-child {
+  padding-right: 0;
+  border-right: none; /* LTR */
+}
+.chgk-pack-edit-form .operations li:first-child {
+  padding-left: 0; /* LTR */
+}
+

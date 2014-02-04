@@ -81,7 +81,7 @@ chgk.pack_add:
   path: '/pack/add'
   defaults:
     _entity_form: 'chgk_pack.add'
-    _title: 'Add question pack'
+    _title: 'Добавление пакета вопросов'
   requirements:
     _permission: 'create questions'
 

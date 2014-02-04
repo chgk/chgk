@@ -121,7 +121,7 @@ class Pack extends ContentEntityBase implements PackInterface {
       ->setDescription(t('Туры1'))
       ->setSettings(array(
         'target_type' => 'chgk_pack',
-        'default_value' => 0,
+        'default_value' => NULL,
       ));
 
     $fields['title'] = FieldDefinition::create('text')
@@ -159,6 +159,10 @@ class Pack extends ContentEntityBase implements PackInterface {
       ->setLabel(t('Changed'))
       ->setDescription(t('The time that the question was last edited.'))
       ->setPropertyConstraints('value', array('EntityChanged' => array()));
+
+    $fields['weight'] = FieldDefinition::create('integer')
+      ->setLabel(t('Weight'))
+      ->setDescription(t('The weight.'));
 
 
     return $fields;

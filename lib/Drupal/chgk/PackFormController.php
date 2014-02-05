@@ -127,19 +127,16 @@ class PackFormController extends ContentEntityFormController {
           '#theme' => 'links',
 
       );
-/*      if ($tour->id()) {
+      if ($tour->id()) {
         $item['actions']['links']['#links'][] = array(
           'title' => t('Просмотр'),
-          'href' => $tour->uri()['path'],
-          'options' => $tour->uri()['options'],
-        );
+        )+$tour->urlInfo();
+
         $item['actions']['links']['#links'][] = array(
           'title' => t('Редактирование'),
-          'href' => $tour->uri('edit-form')['path'],
-          'options' => $tour->uri('edit-form')['options'],
-        );
+        )+$tour->urlInfo('edit-form');
       }
-*/
+
       $item['actions']['delete'] = array(
         '#type' => 'submit',
         '#name' => 'remove_tour_'.$delta,

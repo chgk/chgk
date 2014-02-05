@@ -100,13 +100,12 @@ class QuestionController extends ControllerBase {
 
     $build = $this->buildPage($chgk_question);
 unset($build['questions']['#cache']);
-    foreach ($chgk_question->uriRelationships() as $rel) {      
-      $uri = $chgk_question->uri($rel);
+    foreach ($chgk_question->uriRelationships() as $rel) {
       // Set the node path as the canonical URL to prevent duplicate content.
       $build['#attached']['drupal_add_html_head_link'][] = array(
         array(
         'rel' => $rel,
-        'href' => $this->urlGenerator()->generateFromPath($uri['path'], $uri['options']),
+        'href' => $chgk_question->url($rel),
         )
         , TRUE);
 
@@ -115,7 +114,7 @@ unset($build['questions']['#cache']);
         $build['#attached']['drupal_add_html_head_link'][] = array(
           array(
             'rel' => 'shortlink',
-            'href' => $this->urlGenerator()->generateFromPath($uri['path'], array_merge($uri['options'], array('alias' => TRUE))),
+            'href' => $chgk_question->url($rel,  array('alias' => TRUE)),
           )
         , TRUE);
       }

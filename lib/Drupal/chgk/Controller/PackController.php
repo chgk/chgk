@@ -11,6 +11,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\chgk\QuestionTypeInterface;
 use Drupal\chgk\PackInterface;
 use Drupal\chgk\PackManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Returns responses for Node routes.
@@ -31,12 +32,11 @@ class PackController extends ControllerBase {
     $build = $this->buildPage($chgk_pack);
     unset($build['packs']['#cache']);
     foreach ($chgk_pack->uriRelationships() as $rel) {      
-      $uri = $chgk_pack->uri($rel);
       // Set the node path as the canonical URL to prevent duplicate content.
       $build['#attached']['drupal_add_html_head_link'][] = array(
         array(
         'rel' => $rel,
-        'href' => $this->urlGenerator()->generateFromPath($uri['path'], $uri['options']),
+        'href' => $chgk_pack->url($rel),
         )
         , TRUE);
     }
@@ -65,7 +65,7 @@ class PackController extends ControllerBase {
    * @return array
    *   An array suitable for drupal_render().
    */
-  protected function buildPage(QuestionInterface $chgk_pack) {
+  protected function buildPage(PackInterface $chgk_pack) {
     $viewBuilder = $this->entityManager()->getViewBuilder('chgk_pack');
     return array(
       'packs' => $this->entityManager()->getViewBuilder('chgk_pack')->view($chgk_pack)

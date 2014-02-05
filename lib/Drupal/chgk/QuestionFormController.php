@@ -30,7 +30,7 @@ class QuestionFormController extends ContentEntityFormController {
       );
     }
     
-    if ($form_state['parent']) {
+    if (isset($form_state['parent'])) {
       $form['pack_title'] = array(
         '#type' => 'item',
         '#weight' => -100,

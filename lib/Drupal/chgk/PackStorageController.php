@@ -57,7 +57,7 @@ class PackStorageController extends FieldableDatabaseStorageController implement
 
   protected function buildQuery($ids, $revision_id = FALSE) {
     $query = parent::buildQuery( $ids, $revision_id );
-    $query->leftJoin($this->entityInfo->getBaseTable(), 'base2', "base.{$this->idKey} = base2.parent");
+    $query->leftJoin($this->entityType->getBaseTable(), 'base2', "base.{$this->idKey} = base2.parent");
     $query->groupBy("base.{$this->idKey}");
     $query->addExpression('COUNT(*)', 'tour_count');
     return $query;

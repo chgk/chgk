@@ -19,14 +19,15 @@ class PackViewBuilder extends EntityViewBuilder {
   public function buildContent(array $entities, array $displays, $view_mode, $langcode = NULL) {
     parent::buildContent($entities, $displays, $view_mode, $langcode);
     if ($displays['chgk_pack']->getComponent('tours')) {
-      $this->buildTours();
+      $this->buildTours($entities);
     }
   }
   
-  private function buildTours() {
+  private function buildTours($entities) {
     $storage = $this->entityManager->getStorageController('chgk_pack');
     foreach ($entities as $entity) {
       $tours = $entity->get('tours');
+      $ids = array();
       foreach ($tours as $delta => $tour) {
         if ($tour->target_id !== NULL) {
           $ids[] = $tour->target_id;

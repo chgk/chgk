@@ -149,7 +149,10 @@ function chgk_permission() {
  */
 function chgk_question_uri(EntityInterface $chgk_question) {
   return array(
-    'path' => 'question/' . $chgk_question->id(),
+    'route_name' => 'chgk_question.view',
+    'route_parameters' => array(
+      'chgk_question' => $chgk_question->id(),
+    ),
   );
 }
 
@@ -187,8 +190,7 @@ function template_preprocess_chgk_question(&$variables) {
   $variables['view_mode'] = $variables['elements']['#view_mode'];
   $variables['question'] = $variables['elements']['#chgk_question'];
   $question = $variables['question'];
-  $uri = $question->uri();
-  $variables['question_url']  = url($uri['path'], $uri['options']);
+  $variables['question_url'] = $question->url();
   $variables['page'] = $variables['view_mode'] == 'full' && chgk_question_is_page($question);
 
   // Helpful $content variable for templates.
@@ -217,10 +219,8 @@ function template_preprocess_chgk_question(&$variables) {
 function template_preprocess_chgk_pack(&$variables) {
   $variables['view_mode'] = $variables['elements']['#view_mode'];
   $pack = $variables['pack'] = $variables['elements']['#chgk_pack'];
-//  $question = $variables['question'];
-  $uri = $pack->uri();
-  $variables['pack_url']  = url($uri['path'], $uri['options']);
-  $variables['page'] = $variables['view_mode'] == 'full' && chgk_question_is_page($question);
+  $variables['pack_url']  = $pack->url();
+//  $variables['page'] = $variables['view_mode'] == 'full' && chgk_question_is_page($question);
 
   // Helpful $content variable for templates.
   $variables += array('content' => array());

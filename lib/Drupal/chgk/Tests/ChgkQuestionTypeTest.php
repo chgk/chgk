@@ -17,7 +17,7 @@ class ChgkQuestionTypeTest extends ChgkTestBase {
    *
    * @var array
    */
-  public static $modules = array('field_ui');
+  public static $modules = array('field_ui', 'chgk', 'datetime');
 
   public static function getInfo() {
     return array(

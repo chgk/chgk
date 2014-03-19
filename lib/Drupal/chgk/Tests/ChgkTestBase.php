@@ -18,7 +18,7 @@ abstract class ChgkTestBase extends WebTestBase {
    *
    * @var array
    */
-  public static $modules = array('chgk');
+  public static $modules = array('chgk', 'datetime');
 
   /**
    * Creates a custom content type based on default settings.

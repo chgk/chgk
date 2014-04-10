@@ -9,16 +9,16 @@ namespace Drupal\chgk\Entity;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\chgk\PackInterface;
 use Drupal\Core\Field\FieldDefinition;
-use Drupal\Core\Entity\EntityStorageControllerInterface;
-
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Entity\EntityStorageInterface;
 /**
  * Defines the question pack entity.
  *
- * @EntityType(
+ * @ContentEntityType(
  *   id = "chgk_pack",
  *   label = @Translation("Chgk Question Pack"),
  *   controllers = {
- *     "storage" = "Drupal\chgk\PackStorageController",
+ *     "storage" = "Drupal\chgk\PackStorage",
  *     "view_builder" = "Drupal\chgk\PackViewBuilder",
  *     "access" = "Drupal\chgk\PackAccessController",
  *     "form" = {
@@ -66,8 +66,8 @@ class Pack extends ContentEntityBase implements PackInterface {
   /**
    * {@inheritdoc}
    */
-  public static function preCreate(EntityStorageControllerInterface $storage_controller, array &$values) {
-    parent::preCreate($storage_controller, $values);
+  public static function preCreate(EntityStorageInterface $storage, array &$values) {
+    parent::preCreate($storage, $values);
     // @todo Handle this through property defaults.
     if (empty($values['created'])) {
       $values['created'] = REQUEST_TIME;
@@ -80,8 +80,8 @@ class Pack extends ContentEntityBase implements PackInterface {
   /**
    * {@inheritdoc}
    */
-  public function preSave(EntityStorageControllerInterface $storage_controller) {
-    parent::preSave($storage_controller);
+  public function preSave(EntityStorageInterface $storage) {
+    parent::preSave($storage);
     // Before saving the pack, set changed and revision times.
     $this->changed->value = REQUEST_TIME;
   }
@@ -89,7 +89,7 @@ class Pack extends ContentEntityBase implements PackInterface {
   /**
    * {@inheritdoc}
    */
-  public static function baseFieldDefinitions($entity_type) {
+  public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields['pid'] = FieldDefinition::create('integer')
       ->setLabel(t('Pack ID'))
       ->setDescription(t('The pack ID.'))

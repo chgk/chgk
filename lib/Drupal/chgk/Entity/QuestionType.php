@@ -8,23 +8,23 @@
 namespace Drupal\chgk\Entity;
 
 use Drupal\Core\Config\Entity\ConfigEntityBase;
-use Drupal\Core\Entity\EntityStorageControllerInterface;
+use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\chgk\QuestionTypeInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
 
 /**
  * Defines the Question type configuration entity.
  *
- * @EntityType(
+ * @ConfigEntityType(
  *   id = "chgk_question_type",
  *   label = @Translation("Question type"),
  *   controllers = {
- *     "storage" = "Drupal\Core\Config\Entity\ConfigStorageController",
  *     "form" = {
  *       "add" = "Drupal\chgk\QuestionTypeFormController",
  *       "edit" = "Drupal\chgk\QuestionTypeFormController",
  *       "delete" = "Drupal\chgk\Form\QuestionTypeDeleteConfirm"
  *     },
- *     "list" = "Drupal\chgk\QuestionTypeListController",
+ *     "list_builder" = "Drupal\chgk\QuestionTypeListBuilder",
  *   },
  *   admin_permission = "administer question types",
  *   config_prefix = "chgk.question_type",
@@ -89,8 +89,8 @@ class QuestionType extends ConfigEntityBase implements QuestionTypeInterface {
   /**
    * {@inheritdoc}
    */
-  public function postSave(EntityStorageControllerInterface $storage_controller, $update = TRUE) {
-    parent::postSave($storage_controller, $update);
+  public function postSave(EntityStorageInterface $storage, $update = TRUE) {
+    parent::postSave($storage, $update);
     $this->clearUpdateCache($update);
     if ( $update && $this->getOriginalId() != $this->id() ) {
       $this->moveQuestions();

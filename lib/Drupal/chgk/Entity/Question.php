@@ -9,17 +9,17 @@ namespace Drupal\chgk\Entity;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\chgk\QuestionInterface;
 use Drupal\Core\Field\FieldDefinition;
-use Drupal\Core\Entity\EntityStorageControllerInterface;
+use Drupal\Core\Entity\EntityStorageInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
 
 /**
  * Defines the chgk question entity.
  *
- * @EntityType(
+ * @ContentEntityType(
  *   id = "chgk_question",
  *   label = @Translation("Chgk Question"),
  *   bundle_label = @Translation("Question Type"),
  *   controllers = {
- *     "storage" = "Drupal\chgk\QuestionStorageController",
  *     "view_builder" = "Drupal\chgk\QuestionViewBuilder",
  *     "access" = "Drupal\chgk\QuestionAccessController",
  *     "form" = {
@@ -74,8 +74,8 @@ class Question extends ContentEntityBase implements QuestionInterface {
   /**
    * {@inheritdoc}
    */
-  public static function preCreate(EntityStorageControllerInterface $storage_controller, array &$values) {
-    parent::preCreate($storage_controller, $values);
+  public static function preCreate(EntityStorageInterface $storage, array &$values) {
+    parent::preCreate($storage, $values);
     // @todo Handle this through property defaults.
     if (empty($values['created'])) {
       $values['created'] = REQUEST_TIME;
@@ -85,8 +85,8 @@ class Question extends ContentEntityBase implements QuestionInterface {
   /**
    * {@inheritdoc}
    */
-  public function preSave(EntityStorageControllerInterface $storage_controller) {
-    parent::preSave($storage_controller);
+  public function preSave(EntityStorageInterface $storage) {
+    parent::preSave($storage);
     // Before saving the node, set changed and revision times.
     $this->changed->value = REQUEST_TIME;
   }
@@ -95,7 +95,7 @@ class Question extends ContentEntityBase implements QuestionInterface {
   /**
    * {@inheritdoc}
    */
-  public static function baseFieldDefinitions($entity_type) {
+  public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields['qid'] = FieldDefinition::create('integer')
       ->setLabel(t('Question ID'))
       ->setDescription(t('The question ID.'))

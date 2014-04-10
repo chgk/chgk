@@ -8,12 +8,12 @@
 namespace Drupal\chgk;
 
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Entity\EntityStorageControllerInterface;
+use Drupal\Core\Entity\EntityStorageInterface;
 
 /**
  * Defines a common interface for taxonomy term entity controller classes.
  */
-interface PackStorageControllerInterface extends EntityStorageControllerInterface {
+interface PackStorageInterface extends EntityStorageInterface {
 
   /**
    * Finds all children of a pack ID.

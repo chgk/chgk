@@ -9,12 +9,12 @@ namespace Drupal\chgk;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\Query\QueryInterface;
-use Drupal\Core\Entity\FieldableDatabaseStorageController;
+use Drupal\Core\Entity\ContentEntityDatabaseStorage;
 
 /**
  * Defines a Controller class for question package
  */
-class PackStorageController extends FieldableDatabaseStorageController implements PackStorageControllerInterface {
+class PackStorage extends ContentEntityDatabaseStorage implements PackStorageInterface {
 
   private $machineNameCache = array();
   /**

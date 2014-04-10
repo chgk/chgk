@@ -80,7 +80,7 @@ class PackController extends ControllerBase {
   }
 
   public function addChild( PackInterface $chgk_pack ) {
-    $new_pack = $this->entityManager()->getStorageController('chgk_pack')->create(array(
+    $new_pack = $this->entityManager()->getStorage('chgk_pack')->create(array(
       'parent' => $chgk_pack->id(),
       'uid' => $chgk_pack->uid->value
     ));

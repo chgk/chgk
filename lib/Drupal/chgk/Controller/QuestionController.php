@@ -60,8 +60,7 @@ class QuestionController extends ControllerBase {
       'type' => $chgk_question_type->id(),
       'uid' => $account->id(),
     ));
-    $form = $this->entityManager()->getForm($question);
-
+    $form = $this->entityFormBuilder()->getForm($question);
 
     return $form;
   }
@@ -77,7 +76,7 @@ class QuestionController extends ControllerBase {
    */
   public function addChild(QuestionTypeInterface $chgk_question_type, PackInterface $chgk_pack) {
     $account = $this->currentUser();
-    $question = $this->entityManager()->getStorageController('chgk_question')->create(array(
+    $question = $this->entityManager()->getStorage('chgk_question')->create(array(
       'type' => $chgk_question_type->id(),
       'uid' => $account->id(),
     ));

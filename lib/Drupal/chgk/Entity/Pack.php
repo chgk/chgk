@@ -46,7 +46,6 @@ use Drupal\Core\Entity\EntityStorageInterface;
  * )
  */
 class Pack extends ContentEntityBase implements PackInterface {
-  public $pid;
 
   /**
    * Implements Drupal\Core\Entity\EntityInterface::id().

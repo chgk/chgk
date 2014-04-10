@@ -9,6 +9,7 @@ namespace Drupal\chgk;
 
 use Drupal\Core\Entity\ContentEntityFormController;
 use Drupal\Component\Utility\NestedArray;
+use Drupal\Core\Cache\Cache;
 
 
 /**
@@ -28,12 +29,12 @@ class PackFormController extends ContentEntityFormController {
     // These elements are just values so they are not even sent to the client.
 
     $form['#attached']['css'] = array(drupal_get_path('module', 'chgk') . '/css/chgk.admin.css');
-    foreach (array('pid', 'type', 'uid', 'parent') as $key) {
+/*    foreach (array('pid', 'type', 'uid', 'parent') as $key) {
       $form[$key] = array(
         '#type' => 'value',
         '#value' => isset($pack->$key) ? $pack->$key : NULL,
       );
-    }
+    }*/
     $form['title'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Title'),
@@ -90,7 +91,7 @@ class PackFormController extends ContentEntityFormController {
       if (!$this->entity->tours[$delta]->isEmpty()) {
         $tour = $this->entity->tours[$delta]->entity;
       } else {
-        $tour = $this->entityManager->getStorageController('chgk_pack')->create(array(
+        $tour = $this->entityManager->getStorage('chgk_pack')->create(array(
           'parent' => $this->entity->id(),
           'uid' => $this->entity->uid->value,
           'short_title'=>t('!number тур', array('!number'=>$delta+1))
@@ -246,7 +247,7 @@ class PackFormController extends ContentEntityFormController {
    */
   public function save(array $form, array &$form_state) {
     if (isset($form_state['deleted_tours'])){
-      $storage_controller = $this->entityManager->getStorageController('chgk_pack');
+      $storage_controller = $this->entityManager->getStorage('chgk_pack');
       $deleted = $storage_controller->loadMultiple($form_state['deleted_tours']);
       $storage_controller->delete($deleted);
     }
@@ -284,8 +285,7 @@ class PackFormController extends ContentEntityFormController {
       $form_state['rebuild'] = TRUE;
     }
 
-    // Clear the page and block caches.
-    cache_invalidate_tags(array('content' => TRUE));
+    Cache::invalidateTags(array('content' => TRUE));
   }
   
   public function buildEntity(array $form, array &$form_state) {

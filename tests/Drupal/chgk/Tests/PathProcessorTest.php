@@ -48,7 +48,7 @@ class PathProcessorTest extends UnitTestCase {
       ->disableOriginalConstructor()
       ->getMock();
 
-    $this->entityManager->expects( $this->any() )->method('getStorageController')->will(
+    $this->entityManager->expects( $this->any() )->method('getStorage')->will(
       $this->returnCallback($getStorageCallback));
 
     $this->pathProcessor = new PathProcessor( $this->entityManager );

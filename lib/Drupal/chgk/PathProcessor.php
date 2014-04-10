@@ -40,7 +40,7 @@ class PathProcessor implements InboundPathProcessorInterface, OutboundPathProces
    */
   public function processInbound($path, Request $request) {
     if (preg_match('~^tour/([^/]+)$~' , $path, $matches )) {
-      $pid = $this->entityManager->getStorageController('chgk_pack')->machineNameToId($matches[1]);
+      $pid = $this->entityManager->getStorage('chgk_pack')->machineNameToId($matches[1]);
       if ($pid) $path = 'pack/'.$pid;
     }
     return $path;
@@ -52,7 +52,7 @@ class PathProcessor implements InboundPathProcessorInterface, OutboundPathProces
   public function processOutbound($path, &$options = array(), Request $request = NULL) {
     if (empty($options['alias'])) {
       if (preg_match('~^pack/([^/]+)$~' , $path, $matches )) {
-        $machine_name = $this->entityManager->getStorageController('chgk_pack')->idToMachineName($matches[1]);
+        $machine_name = $this->entityManager->getController('chgk_pack', 'storage')->idToMachineName($matches[1]);
         if ($machine_name) $path = 'tour/'.$machine_name;
       }
     }

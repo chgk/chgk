@@ -1,0 +1,8 @@
+chgk.overview_question_types:
+  title: 'Типы вопросов'
+  parent: system.admin_structure
+  description: 'Управление типами вопросов'
+  route_name: chgk.overview_question_types
+chgk.question_add_page:
+  title: 'Добавить вопрос'
+  route_name: chgk.question_add_page

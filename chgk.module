@@ -6,7 +6,9 @@
  */
 
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\chgk\QuestionInterface;
 use Drupal\Core\Language\Language;
+use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use Drupal\Core\Cache\CacheBackendInterface;
 
 /**
@@ -141,7 +143,7 @@ function chgk_permission() {
 /**
  * Entity URI callback.
  *
- * @param \Drupal\Core\Entity\EntityInterface $node
+ * @param \Drupal\Core\Entity\EntityInterface $chgk_question
  *   A node entity.
  *
  * @return array
@@ -165,9 +167,12 @@ function chgk_question_uri(EntityInterface $chgk_question) {
  * @return
  *   The ID of the question if this is a full page view, otherwise FALSE.
  */
-function chgk_question_is_page(EntityInterface $chgk_question) {
-  $page_object = menu_get_object();
-  return (!empty($page_object) ? $page_object->id() == $chgk_question->id() : FALSE);
+function chgk_question_is_page(QuestionInterface $chgk_question) {
+  $request = \Drupal::request();
+  if ($request->attributes->get(RouteObjectInterface::ROUTE_NAME) == 'chgk.question_view') {
+    $page_question = $request->attributes->get('chgk_question');
+  }
+  return (!empty($page_question) ? $page_question->id() == $chgk_question->id() : FALSE);
 }
 
 

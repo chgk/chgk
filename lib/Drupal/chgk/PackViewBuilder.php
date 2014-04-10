@@ -24,7 +24,7 @@ class PackViewBuilder extends EntityViewBuilder {
   }
   
   private function buildTours($entities) {
-    $storage = $this->entityManager->getStorageController('chgk_pack');
+    $storage = $this->entityManager->getStorage('chgk_pack');
     foreach ($entities as $entity) {
       $tours = $entity->get('tours');
       $ids = array();

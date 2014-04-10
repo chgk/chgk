@@ -52,7 +52,6 @@ use Drupal\Core\Entity\EntityTypeInterface;
  * )
  */
 class Question extends ContentEntityBase implements QuestionInterface {
-  public $qid;
 
   /**
    * Implements Drupal\Core\Entity\EntityInterface::id().

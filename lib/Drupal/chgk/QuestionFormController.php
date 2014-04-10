@@ -8,6 +8,7 @@
 namespace Drupal\chgk;
 
 use Drupal\Core\Entity\ContentEntityFormController;
+use Drupal\Core\Cache\Cache;
 
 /**
  * Form controller for the question edit forms.
@@ -21,15 +22,13 @@ class QuestionFormController extends ContentEntityFormController {
    */
   public function form(array $form, array &$form_state) {
     $question = $this->entity;
-    // Basic question information.
-    // These elements are just values so they are not even sent to the client.
-    foreach (array('qid', 'type', 'uid') as $key) {
+/*    foreach (array('qid', 'id', 'uid') as $key) {
       $form[$key] = array(
         '#type' => 'value',
         '#value' => isset($question->$key) ? $question->$key : NULL,
       );
     }
-    
+*/    
     if (isset($form_state['parent'])) {
       $form['pack_title'] = array(
         '#type' => 'item',
@@ -83,7 +82,7 @@ class QuestionFormController extends ContentEntityFormController {
     }
 
     // Clear the page and block caches.
-    cache_invalidate_tags(array('content' => TRUE));
+    Cache::invalidateTags(array('content' => TRUE));
   }
 
 }

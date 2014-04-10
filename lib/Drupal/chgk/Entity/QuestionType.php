@@ -12,6 +12,7 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\chgk\QuestionTypeInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 
+
 /**
  * Defines the Question type configuration entity.
  *
@@ -27,7 +28,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
  *     "list_builder" = "Drupal\chgk\QuestionTypeListBuilder",
  *   },
  *   admin_permission = "administer question types",
- *   config_prefix = "chgk.question_type",
+ *   config_prefix = "question_type",
  *   bundle_of = "chgk_question",
  *   entity_keys = {
  *     "id" = "id",

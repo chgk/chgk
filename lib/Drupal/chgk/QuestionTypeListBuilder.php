@@ -6,11 +6,11 @@
 
 namespace Drupal\chgk;
 
-use Drupal\Core\Config\Entity\ConfigEntityListController;
+use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
 use Drupal\Core\Entity\EntityControllerInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Entity\EntityStorageControllerInterface;
+use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Routing\UrlGeneratorInterface;
 use Drupal\Core\Entity\EntityInterface;
@@ -20,7 +20,7 @@ use Drupal\Component\Utility\String;
 /**
  * Provides a listing of node types.
  */
-class QuestionTypeListController extends ConfigEntityListController implements EntityControllerInterface {
+class QuestionTypeListBuilder extends ConfigEntityListBuilder  {
 
   /**
    * The url generator service.
@@ -43,18 +43,18 @@ class QuestionTypeListController extends ConfigEntityListController implements E
    * @param \Drupal\Core\Routing\UrlGeneratorInterface $url_generator
    *   The url generator service.
    */
-  public function __construct(EntityTypeInterface $entity_info, EntityStorageControllerInterface $storage, ModuleHandlerInterface $module_handler, UrlGeneratorInterface $url_generator) {
-    parent::__construct($entity_info, $storage, $module_handler);
+  public function __construct(EntityTypeInterface $entity_type, EntityStorageInterface $storage,  UrlGeneratorInterface $url_generator) {
+    parent::__construct($entity_type, $storage);
     $this->urlGenerator = $url_generator;
   }
+
   /**
    * {@inheritdoc}
    */
-  public static function createInstance(ContainerInterface $container, EntityTypeInterface $entity_info) {
+  public static function createInstance(ContainerInterface $container, EntityTypeInterface $entity_type) {
     return new static(
-      $entity_info,
-      $container->get('entity.manager')->getStorageController($entity_info->id()),
-      $container->get('module_handler'),
+      $entity_type,
+      $container->get('entity.manager')->getStorage($entity_type->id()),
       $container->get('url_generator')
     );
   }

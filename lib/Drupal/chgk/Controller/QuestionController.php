@@ -32,7 +32,7 @@ class QuestionController extends ControllerBase {
    * @see node_menu()
    */
   public function addPage() {
-    $content = $this->entityManager()->getStorageController('chgk_question_type')->loadMultiple();
+    $content = $this->entityManager()->getStorage('chgk_question_type')->loadMultiple();
     // Bypass the node/add listing if only one question type is available.
     if (count($content) == 1) {
       $type = array_shift($content);
@@ -56,7 +56,7 @@ class QuestionController extends ControllerBase {
    */
   public function add(QuestionTypeInterface $chgk_question_type) {
     $account = $this->currentUser();
-    $question = $this->entityManager()->getStorageController('chgk_question')->create(array(
+    $question = $this->entityManager()->getStorage('chgk_question')->create(array(
       'type' => $chgk_question_type->id(),
       'uid' => $account->id(),
     ));

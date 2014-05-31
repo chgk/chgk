@@ -2,12 +2,12 @@
 
 /**
  * @file
- * Definition of Drupal\chgk\PackFormController.
+ * Definition of Drupal\chgk\PackForm.
  */
 
 namespace Drupal\chgk;
 
-use Drupal\Core\Entity\ContentEntityFormController;
+use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Cache\Cache;
 
@@ -15,12 +15,12 @@ use Drupal\Core\Cache\Cache;
 /**
  * Form controller for the question edit forms.
  */
-class PackFormController extends ContentEntityFormController {
+class PackForm extends ContentEntityForm {
 
   public $entity;
 
   /**
-   * Overrides Drupal\Core\Entity\EntityFormController::form().
+   * Overrides Drupal\Core\Entity\EntityForm::form().
    */
   public function form(array $form, array &$form_state) {
     $request = $this->getRequest();
@@ -243,7 +243,7 @@ class PackFormController extends ContentEntityFormController {
   }
 
   /**
-   * Overrides Drupal\Core\Entity\EntityFormController::save().
+   * Overrides Drupal\Core\Entity\EntityForm::save().
    */
   public function save(array $form, array &$form_state) {
     if (isset($form_state['deleted_tours'])){
@@ -306,7 +306,7 @@ class PackFormController extends ContentEntityFormController {
   }
   
   /**
-   * Overrides Drupal\Core\Entity\EntityFormController::delete().
+   * Overrides Drupal\Core\Entity\EntityForm::delete().
    */
   public function delete(array $form, array &$form_state) {
     $destination = array();

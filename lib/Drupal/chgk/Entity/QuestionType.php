@@ -21,8 +21,8 @@ use Drupal\Core\Entity\EntityTypeInterface;
  *   label = @Translation("Question type"),
  *   controllers = {
  *     "form" = {
- *       "add" = "Drupal\chgk\QuestionTypeFormController",
- *       "edit" = "Drupal\chgk\QuestionTypeFormController",
+ *       "add" = "Drupal\chgk\QuestionTypeForm",
+ *       "edit" = "Drupal\chgk\QuestionTypeForm",
  *       "delete" = "Drupal\chgk\Form\QuestionTypeDeleteConfirm"
  *     },
  *     "list_builder" = "Drupal\chgk\QuestionTypeListBuilder",

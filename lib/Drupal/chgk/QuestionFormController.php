@@ -2,23 +2,23 @@
 
 /**
  * @file
- * Definition of Drupal\chgk\QuestionFormController.
+ * Definition of Drupal\chgk\QuestionForm.
  */
 
 namespace Drupal\chgk;
 
-use Drupal\Core\Entity\ContentEntityFormController;
+use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Cache\Cache;
 
 /**
  * Form controller for the question edit forms.
  */
-class QuestionFormController extends ContentEntityFormController {
+class QuestionForm extends ContentEntityForm {
 
   public $entity;
 
   /**
-   * Overrides Drupal\Core\Entity\EntityFormController::form().
+   * Overrides Drupal\Core\Entity\EntityForm::form().
    */
   public function form(array $form, array &$form_state) {
     $question = $this->entity;
@@ -49,7 +49,7 @@ class QuestionFormController extends ContentEntityFormController {
   }
 
   /**
-   * Overrides Drupal\Core\Entity\EntityFormController::save().
+   * Overrides Drupal\Core\Entity\EntityForm::save().
    */
   public function save(array $form, array &$form_state) {
     $question = $this->entity;

@@ -30,7 +30,7 @@ class QuestionTypeListBuilder extends ConfigEntityListBuilder  {
   protected $urlGenerator;
 
   /**
-   * Constructs a NodeTypeFormController object.
+   * Constructs a NodeTypeForm object.
    *
    * @param string $entity_type
    *   The type of entity to be listed.

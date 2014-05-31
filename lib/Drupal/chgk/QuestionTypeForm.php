@@ -2,19 +2,19 @@
 
 /**
  * @file
- * Contains \Drupal\chgk\QuestionTypeFormController.
+ * Contains \Drupal\chgk\QuestionTypeForm.
  */
 
 namespace Drupal\chgk;
 
-use Drupal\Core\Entity\EntityFormController;
+use Drupal\Core\Entity\EntityForm;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Component\Utility\String;
 
 /**
  * Form controller for node type forms.
  */
-class QuestionTypeFormController extends EntityFormController {
+class QuestionTypeForm extends EntityForm {
 
   /**
    * {@inheritdoc}

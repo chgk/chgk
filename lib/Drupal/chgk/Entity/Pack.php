@@ -22,10 +22,10 @@ use Drupal\Core\Entity\EntityStorageInterface;
  *     "view_builder" = "Drupal\chgk\PackViewBuilder",
  *     "access" = "Drupal\chgk\PackAccessController",
  *     "form" = {
- *       "add" = "Drupal\chgk\PackFormController",
- *       "default" = "Drupal\chgk\PackFormController",
+ *       "add" = "Drupal\chgk\PackForm",
+ *       "default" = "Drupal\chgk\PackForm",
  *       "delete" = "Drupal\chgk\Form\PackDeleteForm",
- *       "edit" = "Drupal\chgk\PackFormController"
+ *       "edit" = "Drupal\chgk\PackForm"
  *     },
  *   },
  *   base_table = "chgk_pack",

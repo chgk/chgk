@@ -23,10 +23,10 @@ use Drupal\Core\Entity\EntityTypeInterface;
  *     "view_builder" = "Drupal\chgk\QuestionViewBuilder",
  *     "access" = "Drupal\chgk\QuestionAccessController",
  *     "form" = {
- *       "default" = "Drupal\chgk\QuestionFormController",
+ *       "default" = "Drupal\chgk\QuestionForm",
  *       "delete" = "Drupal\chgk\Form\QuestionDeleteForm",
- *       "edit" = "Drupal\chgk\QuestionFormController",
- *       "add" = "Drupal\chgk\QuestionFormController"
+ *       "edit" = "Drupal\chgk\QuestionForm",
+ *       "add" = "Drupal\chgk\QuestionForm"
  *     },
  *     "translation" = "Drupal\chgk\QuestionTranslationController"
  *   },

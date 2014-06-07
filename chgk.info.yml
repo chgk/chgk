@@ -1,0 +1,6 @@
+name: ЧГК
+type: module
+description: 'Управление ЧГК-сущностями -- вопросы, турниры, авторы...'
+package: chgk
+version: VERSION
+core: 8.x

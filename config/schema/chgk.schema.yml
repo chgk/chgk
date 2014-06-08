@@ -1,0 +1,12 @@
+# Schema for the configuration files of the chgk module.
+
+chgk.question_type.*:
+  type: config_entity
+  label: 'Тип вопроса'
+  mapping:
+    label:
+      type: label
+      label: 'Имя'
+    description:
+      type: text
+      label: 'Описание'

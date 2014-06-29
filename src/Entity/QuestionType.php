@@ -21,6 +21,9 @@ use Drupal\Core\Config\Entity\ConfigEntityBase;
  *     "id" = "id",
  *     "label" = "label",
  *   },
+ *   controllers = {
+ *     "list_builder" = "Drupal\chgk\QuestionTypeListBuilder",
+ *   }
  * )
  */
 class QuestionType extends ConfigEntityBase {

@@ -1,0 +1,13 @@
+<?php
+
+/**
+ *  * Implements hook_permission().
+ *   
+ */
+function chgk_permission() {
+  return array(
+    'administer chgk' => array(
+      'title' => 'Администрирование модуля Chgk',
+    ),
+  );
+}

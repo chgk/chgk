@@ -1,0 +1,8 @@
+chgk.question_types:
+  path: '/admin/structure/question_types'
+  defaults:
+    _content: '\Drupal\Core\Entity\Controller\EntityListController::listing'
+    entity_type: 'chgk_question_type'
+    _title: 'Типы вопросов'
+  requirements:
+    _permission: 'administer chgk'

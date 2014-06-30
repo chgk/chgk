@@ -1,0 +1,5 @@
+chgk.question_types:
+  title: 'Типы вопросов'
+  parent: system.admin_structure
+  description: 'Управление типами вопросов'
+  route_name: chgk.question_types

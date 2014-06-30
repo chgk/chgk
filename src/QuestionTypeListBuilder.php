@@ -8,11 +8,8 @@
 namespace Drupal\chgk;
 
 use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
-use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Component\Utility\Xss;
-use Drupal\Component\Utility\String;
 
 /**
  * Defines a class to build a listing of node type entities.

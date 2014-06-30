@@ -6,3 +6,17 @@ chgk.question_types:
     _title: 'Типы вопросов'
   requirements:
     _permission: 'administer chgk'
+chgk.question_type_add:
+  path: '/admin/structure/question_types/add'
+  defaults:
+    _entity_form: 'chgk_question_type.add'
+    _title: 'Добавление типа вопроса'
+  requirements:
+    _permission: 'administer chgk'
+
+node.type_edit:
+  path: '/admin/structure/question_types/manage/{chgk_question_type}'
+  defaults:
+    _entity_form: 'chgk_question_type.edit'
+  requirements:
+    _permission: 'administer chgk'

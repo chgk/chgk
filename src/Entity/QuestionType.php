@@ -23,6 +23,13 @@ use Drupal\Core\Config\Entity\ConfigEntityBase;
  *   },
  *   controllers = {
  *     "list_builder" = "Drupal\chgk\QuestionTypeListBuilder",
+ *     "form" = {
+ *       "add" = "Drupal\chgk\QuestionTypeForm",
+ *       "edit" = "Drupal\chgk\QuestionTypeForm",
+ *     },
+ *   },
+ *   links = {
+ *     "edit-form" = "chgk.type_edit",
  *   }
  * )
  */

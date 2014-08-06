@@ -36,7 +36,21 @@ class QuestionTypeListBuilder extends ConfigEntityListBuilder {
   public function buildRow(EntityInterface $entity) {
     $row['title'] = $this->getLabel($entity);
     $row['description'] = Xss::filterAdmin($entity->description);
+    $row['operations']['data'] = $this->buildOperations($entity);
+//var_dump($row);
     return $row + parent::buildRow($entity);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getDefaultOperations(EntityInterface $entity) {
+    $operations = parent::getDefaultOperations($entity);
+    $destination = drupal_get_destination();
+    foreach ($operations as $key => $operation) {
+      $operations[$key]['query'] = $destination;
+    }
+    return $operations;
   }
 
 

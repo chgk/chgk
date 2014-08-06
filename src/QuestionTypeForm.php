@@ -44,7 +44,7 @@ class QuestionTypeForm extends EntityForm {
       '#default_value' => $type->id(),
       '#maxlength' => 32,
       '#machine_name' => array(
-        'exists' => 'chgk_question_type_load',
+        'exists' => '\Drupal\chgk\Entity\QuestionType::load',
         'source' => array('label'),
       ),
       '#description' => t('Машинное имя типа. Должно состоять из строчных латинских букв, цифр и знаков подчёркивания'),

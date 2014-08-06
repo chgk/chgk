@@ -14,9 +14,18 @@ chgk.question_type_add:
   requirements:
     _permission: 'administer chgk'
 
-node.type_edit:
+chgk.question_type_edit:
   path: '/admin/structure/question_types/manage/{chgk_question_type}'
   defaults:
     _entity_form: 'chgk_question_type.edit'
   requirements:
     _permission: 'administer chgk'
+
+chgk.question_type_delete_confirm:
+  path: '/admin/structure/question_types/manage/{chgk_question_type}/delete'
+  defaults:
+    _entity_form: 'chgk_question_type.delete'
+    _title: 'Delete'
+  requirements:
+    _entity_access: 'chgk_question_type.delete'
+

@@ -26,10 +26,13 @@ use Drupal\Core\Config\Entity\ConfigEntityBase;
  *     "form" = {
  *       "add" = "Drupal\chgk\QuestionTypeForm",
  *       "edit" = "Drupal\chgk\QuestionTypeForm",
+ *       "delete" = "Drupal\chgk\QuestionTypeDeleteConfirmForm"
  *     },
  *   },
+ *   admin_permission = "administer content types",
  *   links = {
- *     "edit-form" = "chgk.type_edit",
+ *     "edit-form" = "chgk.question_type_edit",
+ *     "delete-form" = "chgk.question_type_delete_confirm"
  *   }
  * )
  */

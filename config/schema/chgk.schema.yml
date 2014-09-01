@@ -10,3 +10,4 @@ chgk.question_type.*:
     description:
       type: text
       label: 'Описание'
+

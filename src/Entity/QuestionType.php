@@ -17,6 +17,7 @@ use Drupal\Core\Config\Entity\ConfigEntityBase;
  *   id = "chgk_question_type",
  *   label = @Translation("Тип вопроса"),
  *   config_prefix = "question_type",
+ *   bundle_of = "chgk_question",
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "label",

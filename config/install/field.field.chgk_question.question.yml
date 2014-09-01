@@ -1,0 +1,11 @@
+id: chgk_question.question
+status: true
+name: question
+entity_type: chgk_question
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: false
+indexes: {  }

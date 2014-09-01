@@ -1,0 +1,13 @@
+id: chgk_question.chgk.answer
+status: true
+field_name: answer
+entity_type: chgk_question
+bundle: chgk
+label: Ответ
+description: ''
+required: false
+default_value: {  }
+default_value_function: ''
+settings:
+  text_processing: '0'
+field_type: text_long

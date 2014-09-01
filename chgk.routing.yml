@@ -29,3 +29,17 @@ chgk.question_type_delete_confirm:
   requirements:
     _entity_access: 'chgk_question_type.delete'
 
+chgk.question_view:
+  path: '/question/{chgk_question}'
+  defaults:
+    _content: '\Drupal\chgk\Controller\QuestionController::page'
+    _title_callback: '\Drupal\chgk\Controller\QuestionController::pageTitle'
+  requirements:
+    _permission: 'access content'
+
+chgk.question_edit:
+  path: '/question/{chgk_question}/edit'
+  defaults:
+    _entity_form: 'chgk_question.edit'
+  requirements:
+    _entity_access: 'chgk_question.update'

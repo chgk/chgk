@@ -1,0 +1,42 @@
+id: chgk_question.chgk.default
+targetEntityType: chgk_question
+bundle: chgk
+mode: default
+content:
+  razdatka:
+    weight: 0
+    label: inline
+    settings: { }
+    type: image
+  question:
+    weight: 1
+    label: inline
+    settings: {  }
+    type: text_default
+  answer:
+    weight: 2
+    label: inline
+    settings: {  }
+    type: text_default
+  passcriteria:
+    weight: 3
+    label: inline
+    settings: {  }
+    type: text_default
+  comment:
+    weight: 4
+    label: inline
+    settings: {  }
+    type: text_default
+  sources:
+    weight: 5
+    label: inline
+    settings: {  }
+    type: text_default
+  author:
+    weight: 6
+    label: inline
+    settings: {  }
+    type: text_default
+
+status: true
